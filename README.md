@@ -1,5 +1,6 @@
-# GhidraCMD
+# GhidraCMD 
 
+./decompile.sh [file_name]
 
 # 참고
 

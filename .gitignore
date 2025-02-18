@@ -1,4 +1,5 @@
-ghidra_*
+ghidra_latest.zip
+ghidra/
 .venv
 logs
 programs

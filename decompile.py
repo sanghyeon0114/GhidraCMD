@@ -1,6 +1,6 @@
 import logging
-from ghidra.app.decompiler import DecompInterface
-from ghidra.util.task import ConsoleTaskMonitor
+from ghidra.app.decompiler import DecompInterface # type: ignore
+from ghidra.util.task import ConsoleTaskMonitor # type: ignore
 
 class Log():
     file_path = './logs/'
@@ -19,7 +19,7 @@ class Log():
 
 class Ghidra():
     def __init__(self):
-        self.program = currentProgram
+        self.program = currentProgram # type: ignore
         self.decomp_interface = DecompInterface()
         self.decomp_interface.openProgram(self.program);
         self.program_name = self.program.getName()

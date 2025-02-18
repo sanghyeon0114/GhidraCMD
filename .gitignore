@@ -1,0 +1,5 @@
+ghidra_*
+.venv
+logs
+programs
+projects

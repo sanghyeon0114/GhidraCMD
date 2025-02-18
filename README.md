@@ -1,5 +1,7 @@
 # GhidraCMD 
 
+python setup.py
+
 ./decompile.sh [file_name]
 
 # 참고

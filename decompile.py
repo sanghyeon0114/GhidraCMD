@@ -1,4 +1,3 @@
-import logging
 from ghidra.app.decompiler import DecompInterface # type: ignore
 from ghidra.util.task import ConsoleTaskMonitor # type: ignore
 
@@ -6,16 +5,21 @@ class Log():
     file_path = './logs/'
 
     def __init__(self, binary_name):
-        self.log = logging.getLogger()
-        self.log.setLevel(logging.INFO)
         self.binary_name = binary_name
-        file_handler = logging.FileHandler('{}{}.log'.format(self.file_path, str(self.binary_name)))
-        self.log.addHandler(file_handler)
-        self.log.info('[*] binary Name : ' + str(self.binary_name) + '\n')
+        self.file_name = '{}{}.log'.format(self.file_path, str(self.binary_name))
+        self.file = open(self.file_name, "w+")
+        self.file.write('[*] binary Name : ' + str(self.binary_name) + '\n\n')
+
+    def log(self, message):
+        self.file.write(message + '\n')
+
+    def close(self):
+        self.file.close()
 
     def loggingFunction(self, function_name, decompile_info):
-        self.log.info("---------------- [*] Function : "+str(function_name) + " ----------------")
-        self.log.info(decompile_info)
+        self.log("---------------- [*] Function : "+str(function_name) + " ----------------")
+        self.log(decompile_info)
+
 
 class Ghidra():
     def __init__(self):
@@ -35,7 +39,11 @@ class Ghidra():
         tokengrp = self.decomp_interface.decompileFunction(function, 0, ConsoleTaskMonitor())
         decompile_func = tokengrp.getDecompiledFunction().getC()
         return decompile_func
-    
+
+    def calledFunctions(self, function):
+        callingFuncs = function.getCalledFunctions(self.monitor)
+        return callingFuncs
+
 def main():
     ghidra = Ghidra()
     program_name = ghidra.getProgramName()
@@ -45,6 +53,8 @@ def main():
     for function in ghidra.getFunctions():
         decompile_func = ghidra.decompileFunctions(function)
         log.loggingFunction(function, decompile_func)
+    
+    log.close()
         
 if __name__ == '__main__':
     main()

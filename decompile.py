@@ -1,3 +1,4 @@
+import os
 from ghidra.app.decompiler import DecompInterface # type: ignore
 from ghidra.util.task import ConsoleTaskMonitor # type: ignore
 
@@ -7,6 +8,8 @@ class Log():
     def __init__(self, binary_name):
         self.binary_name = binary_name
         self.file_name = '{}{}.log'.format(self.file_path, str(self.binary_name))
+        if os.path.exists(self.file_name):
+            os.remove(self.file_path)
         self.file = open(self.file_name, "w+")
         self.file.write('[*] binary Name : ' + str(self.binary_name) + '\n\n')
 

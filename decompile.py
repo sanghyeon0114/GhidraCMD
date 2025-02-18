@@ -37,10 +37,10 @@ class Ghidra():
         return decompile_func
     
 def main():
-    log = Log(program_name)
-
     ghidra = Ghidra()
     program_name = ghidra.getProgramName()
+
+    log = Log(program_name)
 
     for function in ghidra.getFunctions():
         decompile_func = ghidra.decompileFunctions(function)

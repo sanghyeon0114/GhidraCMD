@@ -23,6 +23,11 @@ python setup.py
 
 decompile을 위해 ghidra의 프로젝트를 생성하는 위치
 
+- setup.py
+
+1. logs, projects 폴더를 만들어줍니다.
+2. ghidra를 다운받습니다.
+   
 
 # 동작 원리
 
